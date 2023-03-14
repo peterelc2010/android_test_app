@@ -1,0 +1,51 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.androidtestapp">
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!-- Required permission to draw over other apps -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        
+        <!-- The main activity of the app -->
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- The floating widget service -->
+        <service
+            android:name=".FloatingWidgetService"
+            android:enabled="true"
+            android:exported="false" />
+        
+        <!-- The receiver to listen for widget button clicks -->
+        <receiver
+            android:name=".WidgetButtonReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.androidtestapp.ACTION_WIDGET_BUTTON_CLICK" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- The metadata to configure the floating widget -->
+        <meta-data
+            android:name="com.example.androidtestapp.FLOATING_WIDGET_CONFIG"
+            android:resource="@xml/floating_widget_config" />
+            
+        <!-- The metadata to configure the sub-menu -->
+        <meta-data
+            android:name="com.example.androidtestapp.SUB_MENU_CONFIG"
+            android:resource="@menu/sub_menu" />
+            
+    </application>
+
+</manifest>
